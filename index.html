@@ -784,9 +784,9 @@
           },
         };
       })();
-      // Try to play as soon as the page opens; if the browser blocks it,
-      // the first tap/click/key anywhere on the page starts it.
-      birthdayMusic.start();
+      // iOS Safari refuses to play audio created before any real tap, even
+      // if you "resume" it later — so we only create/start the AudioContext
+      // on the very first genuine user gesture, never before.
       ["pointerdown", "touchstart", "click", "keydown"].forEach((ev) =>
         window.addEventListener(ev, () => birthdayMusic.unlock(), {
           passive: true,
