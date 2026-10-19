@@ -1,0 +1,2114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Rabia!</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family:
+          "Quicksand",
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      .font-handwritten {
+        font-family: "Dancing Script", cursive;
+      }
+
+      @keyframes zoomIn {
+        from {
+          opacity: 0;
+          transform: scale(0.92);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pageIn {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .page-enter {
+        animation: pageIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(540deg);
+          opacity: 0.9;
+        }
+      }
+      .confetti-piece {
+        position: fixed;
+        top: -5vh;
+        animation-name: confettiFall;
+        animation-timing-function: cubic-bezier(0.35, 0, 0.65, 1);
+        pointer-events: none;
+        z-index: 60;
+      }
+
+      .flip-card-inner {
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-card {
+        perspective: 1000px;
+      }
+      .flip-face {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+      .flip-back {
+        transform: rotateY(180deg);
+      }
+
+      @keyframes flicker {
+        0%,
+        100% {
+          transform: scale(1, 1) rotate(-1deg);
+        }
+        25% {
+          transform: scale(0.94, 1.08) rotate(1.5deg);
+        }
+        50% {
+          transform: scale(1.05, 0.95) rotate(-1.5deg);
+        }
+        75% {
+          transform: scale(0.96, 1.06) rotate(1deg);
+        }
+      }
+      .flame {
+        transform-origin: 200px 64px;
+        animation: flicker 0.35s infinite ease-in-out;
+      }
+      @keyframes smokeUp {
+        0% {
+          transform: translateY(0) scale(0.6);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-45px) scale(1.8);
+          opacity: 0;
+        }
+      }
+      .smoke {
+        animation: smokeUp 1.6s ease-out forwards;
+      }
+      @keyframes swipeHint {
+        0%,
+        100% {
+          transform: translateX(-30px);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translateX(30px);
+          opacity: 1;
+        }
+      }
+      .swipe-hint {
+        animation: swipeHint 1.4s infinite ease-in-out;
+      }
+      @keyframes numPop {
+        0% {
+          transform: scale(0.4);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .num-pop {
+        animation: numPop 0.5s ease-out both;
+      }
+
+      /* ===== DARK AESTHETIC OVERRIDE ===== */
+      body {
+        background: #0b0614;
+      }
+
+      /* every page background */
+      [class*="bg-gradient-to-br"] {
+        background-image:
+          radial-gradient(
+            circle at 15% 10%,
+            rgba(190, 24, 93, 0.35) 0%,
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 85% 90%,
+            rgba(109, 40, 217, 0.35) 0%,
+            transparent 45%
+          ),
+          linear-gradient(160deg, #0b0614, #150a22 55%, #1f0a1a) !important;
+      }
+
+      /* white cards and buttons become dark glass */
+      .bg-white {
+        background-color: #1a1226 !important;
+        border: 1px solid rgba(244, 114, 182, 0.35);
+        box-shadow: 0 0 18px rgba(244, 114, 182, 0.15);
+      }
+      .bg-pink-50 {
+        background-color: #2a1a3a !important;
+      }
+      .bg-white\/95 {
+        background-color: rgba(26, 18, 38, 0.95) !important;
+        border: 1px solid rgba(244, 114, 182, 0.35);
+        box-shadow: 0 0 18px rgba(244, 114, 182, 0.15);
+      }
+
+      /* text inside those cards */
+      .text-gray-800,
+      .text-gray-700,
+      .text-gray-600 {
+        color: #f3e8ff !important;
+      }
+      .text-pink-600 {
+        color: #f9a8d4 !important;
+      }
+      .text-pink-500 {
+        color: #fb7185 !important;
+      }
+
+      /* glass panels slightly darker */
+      .bg-white\/20 {
+        background-color: rgba(255, 255, 255, 0.07) !important;
+      }
+      .bg-white\/30 {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+      }
+
+      /* question textareas */
+      textarea {
+        background: #120a1c;
+        color: #fff;
+        border-color: rgba(244, 114, 182, 0.5) !important;
+      }
+      textarea::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* soft glow on headings */
+      h1,
+      h2 {
+        text-shadow: 0 0 18px rgba(244, 114, 182, 0.55);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .page-enter,
+        .confetti-piece {
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Firebase JS SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        deleteDoc,
+        doc,
+      } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBcdzDSMW0JmAKizLdX0p-C1GBgMRtOJKY",
+        authDomain: "project-761511292759911753.firebaseapp.com",
+        projectId: "project-761511292759911753",
+        storageBucket: "project-761511292759911753.firebasestorage.app",
+        messagingSenderId: "208280927678",
+        appId: "1:208280927678:web:35ca3bd6848c4241fc4def",
+        measurementId: "G-5VP4EHG72S",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+
+      window.firebaseApp = {
+        db,
+        auth,
+        signInWithEmailAndPassword,
+        addDoc,
+        collection,
+        getDocs,
+        deleteDoc,
+        doc,
+      };
+    </script>
+
+    <script type="text/babel">
+      const { useState, useEffect, useMemo, useRef } = React;
+
+      const Heart = ({ className, onClick }) => (
+        <svg
+          className={className}
+          onClick={onClick}
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      );
+
+      const Camera = ({ className }) => (
+        <svg
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+          />
+          <circle cx="12" cy="13" r="4" />
+        </svg>
+      );
+
+      const MessageCircle = ({ className }) => (
+        <svg
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          />
+        </svg>
+      );
+
+      const Send = ({ className }) => (
+        <svg
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+          />
+        </svg>
+      );
+
+      const Gift = ({ className }) => (
+        <svg
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"
+          />
+        </svg>
+      );
+
+      const BookHeart = ({ className }) => (
+        <svg
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.6}
+            d="M12 7.8c-.8-1-2.5-1-3 .1-.5 1 .2 1.9 3 4 2.8-2.1 3.5-3 3-4-.5-1.1-2.2-1.1-3-.1z"
+          />
+        </svg>
+      );
+
+      // ---- Ambient falling hearts, drawn on canvas (reliable regardless of
+      // CSS animation settings or system "reduce motion" preferences) ----
+      function FloatingHearts() {
+        const canvasRef = useRef(null);
+
+        useEffect(() => {
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          const ctx = canvas.getContext("2d");
+          let animationId;
+          let hearts = [];
+
+          function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          }
+          resize();
+          window.addEventListener("resize", resize);
+
+          const HEART_COLORS = [
+            "#ffffff",
+            "#fbcfe8",
+            "#f9a8d4",
+            "#fecdd3",
+            "#f5d0fe",
+          ];
+
+          function drawHeart(x, y, size, color, opacity, rotation) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.globalAlpha = opacity;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            const top = size * 0.3;
+            ctx.moveTo(0, top);
+            ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, top);
+            ctx.bezierCurveTo(-size / 2, size * 0.6, 0, size * 0.8, 0, size);
+            ctx.bezierCurveTo(
+              0,
+              size * 0.8,
+              size / 2,
+              size * 0.6,
+              size / 2,
+              top,
+            );
+            ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, top);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          }
+
+          class Heart {
+            constructor() {
+              this.reset(true);
+            }
+            reset(initial = false) {
+              this.x = Math.random() * canvas.width;
+              this.y = initial ? Math.random() * canvas.height : -20;
+              this.size = Math.random() * 10 + 10;
+              this.speed = Math.random() * 0.7 + 0.4;
+              this.drift = (Math.random() - 0.5) * 0.5;
+              this.angle = (Math.random() - 0.5) * 0.5;
+              this.spin = (Math.random() - 0.5) * 0.012;
+              this.opacity = Math.random() * 0.35 + 0.3;
+              this.color =
+                HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
+            }
+            update() {
+              this.y += this.speed;
+              this.x += this.drift;
+              this.angle += this.spin;
+              if (this.y > canvas.height + 20) this.reset();
+            }
+            draw() {
+              drawHeart(
+                this.x,
+                this.y,
+                this.size,
+                this.color,
+                this.opacity,
+                this.angle,
+              );
+            }
+          }
+
+          for (let i = 0; i < 45; i++) hearts.push(new Heart());
+
+          const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+
+          if (prefersReducedMotion) {
+            // Draw a single static frame so hearts are still visible.
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach((h) => h.draw());
+          } else {
+            function loop() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              hearts.forEach((h) => {
+                h.update();
+                h.draw();
+              });
+              animationId = requestAnimationFrame(loop);
+            }
+            loop();
+          }
+
+          return () => {
+            window.removeEventListener("resize", resize);
+            if (animationId) cancelAnimationFrame(animationId);
+          };
+        }, []);
+
+        return (
+          <canvas
+            ref={canvasRef}
+            className="fixed inset-0 pointer-events-none"
+            style={{ zIndex: 5 }}
+            aria-hidden="true"
+          />
+        );
+      }
+
+      // ---- Confetti burst, mounts for a few seconds then disappears ----
+      function Confetti({ onDone }) {
+        const pieces = useMemo(() => {
+          const colors = [
+            "#f472b6",
+            "#c084fc",
+            "#fb7185",
+            "#fde68a",
+            "#fca5a5",
+          ];
+          return Array.from({ length: 40 }).map((_, i) => ({
+            id: i,
+            left: Math.random() * 100,
+            size: 6 + Math.random() * 8,
+            duration: 2.2 + Math.random() * 1.6,
+            delay: Math.random() * 0.4,
+            color: colors[i % colors.length],
+            radius: Math.random() > 0.5 ? "9999px" : "2px",
+          }));
+        }, []);
+
+        useEffect(() => {
+          const t = setTimeout(() => onDone && onDone(), 3200);
+          return () => clearTimeout(t);
+        }, []);
+
+        return (
+          <div
+            className="fixed inset-0 overflow-hidden pointer-events-none"
+            aria-hidden="true"
+          >
+            {pieces.map((p) => (
+              <div
+                key={p.id}
+                className="confetti-piece"
+                style={{
+                  left: `${p.left}%`,
+                  width: p.size,
+                  height: p.size * 1.4,
+                  backgroundColor: p.color,
+                  borderRadius: p.radius,
+                  animationDuration: `${p.duration}s`,
+                  animationDelay: `${p.delay}s`,
+                }}
+              />
+            ))}
+          </div>
+        );
+      }
+
+      // Tiny synthesized chime, no external audio file needed
+      function playChime() {
+        try {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          const ctx = new Ctx();
+          const notes = [523.25, 659.25, 783.99];
+          notes.forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.value = freq;
+            const start = ctx.currentTime + i * 0.14;
+            gain.gain.setValueAtTime(0, start);
+            gain.gain.linearRampToValueAtTime(0.18, start + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.5);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.55);
+          });
+        } catch (e) {
+          console.log("Audio not available", e);
+        }
+      }
+      // ---- Background "Happy Birthday" tune (synthesized, loops) ----
+      // ---- Background "Happy Birthday" music box tune (waltz, looping) ----
+      const birthdayMusic = (() => {
+        let ctx = null;
+        let master = null;
+        let reverbIn = null;
+        let timer = null;
+        let started = false;
+        let muted = false;
+        const VOLUME = 0.16;
+        const BEAT = 0.52; // seconds per beat; bigger = slower
+
+        // note frequencies
+        const C3 = 130.81,
+          G2 = 98.0;
+        const B3 = 246.94,
+          D4 = 293.66,
+          E4 = 329.63,
+          F4 = 349.23,
+          G4 = 392.0,
+          A4 = 440.0,
+          B4 = 493.88,
+          C5 = 523.25,
+          D5 = 587.33,
+          E5 = 659.25,
+          F5 = 698.46,
+          G5 = 783.99;
+
+        // Melody: [frequency, beats]; 0 = rest. Written in 3/4 time.
+        const melody = [
+          [0, 2],
+          [G4, 0.75],
+          [G4, 0.25],
+          [A4, 1],
+          [G4, 1],
+          [C5, 1],
+          [B4, 2],
+          [G4, 0.75],
+          [G4, 0.25],
+          [A4, 1],
+          [G4, 1],
+          [D5, 1],
+          [C5, 2],
+          [G4, 0.75],
+          [G4, 0.25],
+          [G5, 1],
+          [E5, 1],
+          [C5, 1],
+          [B4, 1],
+          [A4, 1],
+          [F5, 0.75],
+          [F5, 0.25],
+          [E5, 1],
+          [C5, 1],
+          [D5, 1],
+          [C5, 3],
+          [0, 3],
+        ];
+
+        // Accompaniment per bar (9 bars): bass note + 2 chord notes
+        const C = { bass: C3, chord: [E4, G4] };
+        const G7 = { bass: G2, chord: [B3, D4, F4] };
+        const bars = [C, C, G7, G7, C, C, G7, C, C];
+
+        const total = 9 * 3 * BEAT;
+
+        function makeReverb() {
+          const len = ctx.sampleRate * 2.2;
+          const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+          for (let c = 0; c < 2; c++) {
+            const d = buf.getChannelData(c);
+            for (let i = 0; i < len; i++) {
+              d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.8);
+            }
+          }
+          const conv = ctx.createConvolver();
+          conv.buffer = buf;
+          const wet = ctx.createGain();
+          wet.gain.value = 0.45;
+          reverbIn = ctx.createGain();
+          reverbIn.connect(conv);
+          conv.connect(wet);
+          wet.connect(master);
+        }
+
+        // One music-box / celesta style note
+        function bell(freq, t, dur, vol) {
+          const partials = [
+            [1, 1.0, 1.0],
+            [2, 0.35, 0.6],
+            [3, 0.12, 0.35],
+            [4.2, 0.06, 0.2],
+          ];
+          const out = ctx.createGain();
+          out.connect(master);
+          out.connect(reverbIn);
+          partials.forEach(([mult, amp, decayMult]) => {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.value = freq * mult;
+            const len = Math.max(dur * 1.6, 0.9) * decayMult;
+            g.gain.setValueAtTime(0, t);
+            g.gain.linearRampToValueAtTime(vol * amp, t + 0.008);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+            osc.connect(g);
+            g.connect(out);
+            osc.start(t);
+            osc.stop(t + len + 0.05);
+          });
+        }
+
+        // Soft warm pad note for accompaniment
+        function soft(freq, t, dur, vol) {
+          const osc = ctx.createOscillator();
+          const g = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.value = freq;
+          g.gain.setValueAtTime(0, t);
+          g.gain.linearRampToValueAtTime(vol, t + 0.03);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+          osc.connect(g);
+          g.connect(master);
+          g.connect(reverbIn);
+          osc.start(t);
+          osc.stop(t + dur + 0.05);
+        }
+
+        function scheduleLoop(startAt) {
+          // melody
+          let t = startAt;
+          melody.forEach(([freq, beats]) => {
+            const dur = beats * BEAT;
+            if (freq) bell(freq, t, dur, 0.55);
+            t += dur;
+          });
+          // waltz accompaniment
+          bars.forEach((b, i) => {
+            const barStart = startAt + i * 3 * BEAT;
+            soft(b.bass, barStart, BEAT * 2.6, 0.22);
+            [1, 2].forEach((beat) => {
+              const bt = barStart + beat * BEAT;
+              b.chord.forEach((f) => soft(f, bt, BEAT * 0.9, 0.07));
+            });
+          });
+
+          const nextStart = startAt + total;
+          timer = setTimeout(
+            () => scheduleLoop(nextStart),
+            Math.max((nextStart - ctx.currentTime - 1) * 1000, 100),
+          );
+        }
+
+        document.addEventListener("visibilitychange", () => {
+          if (!ctx || !started) return;
+          if (document.hidden) ctx.suspend();
+          else ctx.resume();
+        });
+
+        return {
+          start() {
+            if (started) return;
+            try {
+              const AC = window.AudioContext || window.webkitAudioContext;
+              ctx = new AC();
+              master = ctx.createGain();
+              master.gain.value = muted ? 0 : VOLUME;
+              master.connect(ctx.destination);
+              makeReverb();
+              started = true;
+              scheduleLoop(ctx.currentTime + 0.2);
+            } catch (e) {
+              console.log("Audio not available", e);
+            }
+          },
+          unlock() {
+            if (!started) {
+              this.start();
+              return;
+            }
+            if (ctx && ctx.state === "suspended" && !document.hidden)
+              ctx.resume();
+          },
+          toggleMute() {
+            muted = !muted;
+            if (master) master.gain.value = muted ? 0 : VOLUME;
+            return muted;
+          },
+        };
+      })();
+      // Try to play as soon as the page opens; if the browser blocks it,
+      // the first tap/click/key anywhere on the page starts it.
+      birthdayMusic.start();
+      ["pointerdown", "touchstart", "click", "keydown"].forEach((ev) =>
+        window.addEventListener(ev, () => birthdayMusic.unlock(), {
+          passive: true,
+        }),
+      );
+
+      function daysSince(dateStr) {
+        const start = new Date(dateStr + "T00:00:00");
+        const now = new Date();
+        const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+        return Math.max(diff, 0);
+      }
+
+      // ---- Cake screen: countdown -> blow candle -> swipe to cut ----
+      function CakeLayer({ x, y, w, h, id, frost }) {
+        const rx = w / 2;
+        const cx = x + rx;
+        const ry = 14;
+        const dripPositions = [0.1, 0.27, 0.45, 0.63, 0.8, 0.92];
+        return (
+          <g>
+            {/* body */}
+            <path
+              d={`M${x},${y} L${x},${y + h} A${rx},${ry} 0 0 0 ${x + w},${y + h} L${x + w},${y} Z`}
+              fill={`url(#sponge-${id})`}
+            />
+            {/* cylinder shading */}
+            <path
+              d={`M${x},${y} L${x},${y + h} A${rx},${ry} 0 0 0 ${x + w},${y + h} L${x + w},${y} Z`}
+              fill="url(#shade)"
+            />
+            {/* frosting drips */}
+            {dripPositions.map((p, i) => {
+              const px = x + w * p;
+              const dx = (px - cx) / rx;
+              const edgeY = y + ry * Math.sqrt(Math.max(0, 1 - dx * dx));
+              const len = 14 + (i % 3) * 9;
+              return (
+                <rect
+                  key={i}
+                  x={px - 6}
+                  y={edgeY - 4}
+                  width={12}
+                  height={len}
+                  rx={6}
+                  fill={frost}
+                />
+              );
+            })}
+            {/* top frosting */}
+            <ellipse cx={cx} cy={y} rx={rx} ry={ry} fill={frost} />
+            <ellipse
+              cx={cx}
+              cy={y}
+              rx={rx - 8}
+              ry={ry - 4}
+              fill="white"
+              opacity="0.35"
+            />
+          </g>
+        );
+      }
+
+      function CakeScreen({ onDone }) {
+        const [phase, setPhase] = useState("countdown"); // countdown | blown | cut | done
+        const [count, setCount] = useState(3);
+        const [cutDone, setCutDone] = useState(false);
+        const [trail, setTrail] = useState([]);
+        const boxRef = useRef(null);
+        const dragging = useRef(false);
+
+        // 3,2,1 countdown
+        useEffect(() => {
+          if (phase !== "countdown") return;
+          if (count === 0) {
+            setPhase("blown");
+            return;
+          }
+          const t = setTimeout(() => setCount((c) => c - 1), 1000);
+          return () => clearTimeout(t);
+        }, [count, phase]);
+
+        // after blowing, switch to swipe-to-cut
+        useEffect(() => {
+          if (phase !== "blown") return;
+          const t = setTimeout(() => setPhase("cut"), 1600);
+          return () => clearTimeout(t);
+        }, [phase]);
+
+        const getPt = (e) => {
+          const r = boxRef.current.getBoundingClientRect();
+          return { x: e.clientX - r.left, y: e.clientY - r.top };
+        };
+
+        const doCut = () => {
+          setCutDone(true);
+          setPhase("done");
+          setTrail([]);
+          playChime();
+          setTimeout(() => onDone && onDone(), 3000);
+        };
+
+        const onDown = (e) => {
+          if (phase !== "cut") return;
+          dragging.current = true;
+          e.currentTarget.setPointerCapture(e.pointerId);
+          setTrail([getPt(e)]);
+        };
+        const onMove = (e) => {
+          if (!dragging.current) return;
+          setTrail((t) => [...t, getPt(e)]);
+        };
+        const onUp = () => {
+          if (!dragging.current) return;
+          dragging.current = false;
+          if (trail.length > 1) {
+            const a = trail[0];
+            const b = trail[trail.length - 1];
+            if (Math.hypot(b.x - a.x, b.y - a.y) > 100) {
+              doCut();
+              return;
+            }
+          }
+          setTrail([]);
+        };
+
+        const cake = (
+          <g>
+            <CakeLayer
+              id="bottom"
+              x={50}
+              y={250}
+              w={300}
+              h={80}
+              frost="#fbcfe8"
+            />
+            <CakeLayer id="mid" x={95} y={175} w={210} h={78} frost="#ffffff" />
+            <CakeLayer
+              id="top"
+              x={140}
+              y={105}
+              w={120}
+              h={73}
+              frost="#fff1f5"
+            />
+            {/* cherries */}
+            <circle cx={165} cy={100} r={7} fill="#e11d48" />
+            <circle cx={163} cy={97} r={2} fill="white" opacity="0.6" />
+            <circle cx={235} cy={100} r={7} fill="#e11d48" />
+            <circle cx={233} cy={97} r={2} fill="white" opacity="0.6" />
+          </g>
+        );
+
+        const half = (side) => (
+          <g
+            clipPath={`url(#clip${side})`}
+            style={{
+              transformOrigin: "200px 340px",
+              transition: "transform 1s cubic-bezier(0.22, 1, 0.36, 1)",
+              transform: cutDone
+                ? side === "L"
+                  ? "translateX(-30px) rotate(-3deg)"
+                  : "translateX(30px) rotate(3deg)"
+                : "none",
+            }}
+          >
+            {cake}
+          </g>
+        );
+
+        const showCandle = phase !== "done";
+        const flameOn = phase === "countdown";
+
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-pink-400 via-purple-400 to-pink-500 flex flex-col items-center justify-center p-4 page-enter">
+            {phase === "done" && <Confetti onDone={() => {}} />}
+
+            <h2 className="text-3xl sm:text-4xl font-bold text-white font-handwritten mb-2 relative z-10 text-center">
+              {phase === "done"
+                ? "Happy Birthday Rabia! 🎂"
+                : "Make a wish… ✨"}
+            </h2>
+
+            <div
+              ref={boxRef}
+              className="relative w-full max-w-md select-none z-10"
+              style={{
+                touchAction: "none",
+                cursor: phase === "cut" ? "grab" : "default",
+              }}
+              onPointerDown={onDown}
+              onPointerMove={onMove}
+              onPointerUp={onUp}
+              onPointerCancel={onUp}
+            >
+              <svg viewBox="0 0 400 380" className="w-full h-auto">
+                <defs>
+                  {[
+                    ["bottom", "#8a5232", "#5a3320"],
+                    ["mid", "#fde7c8", "#efc994"],
+                    ["top", "#f9a8c0", "#e97ba0"],
+                  ].map(([id, c1, c2]) => (
+                    <linearGradient
+                      key={id}
+                      id={`sponge-${id}`}
+                      x1="0"
+                      x2="0"
+                      y1="0"
+                      y2="1"
+                    >
+                      <stop offset="0%" stopColor={c1} />
+                      <stop offset="100%" stopColor={c2} />
+                    </linearGradient>
+                  ))}
+                  <linearGradient id="shade" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0%" stopColor="#000" stopOpacity="0.22" />
+                    <stop offset="30%" stopColor="#fff" stopOpacity="0.12" />
+                    <stop offset="60%" stopColor="#000" stopOpacity="0" />
+                    <stop offset="100%" stopColor="#000" stopOpacity="0.28" />
+                  </linearGradient>
+                  <linearGradient id="candle" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#fde68a" />
+                    <stop offset="50%" stopColor="#fff" />
+                    <stop offset="100%" stopColor="#f9a8d4" />
+                  </linearGradient>
+                  <radialGradient id="glow">
+                    <stop offset="0%" stopColor="#fde68a" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#fde68a" stopOpacity="0" />
+                  </radialGradient>
+                  <radialGradient id="plateShade">
+                    <stop offset="0%" stopColor="#fff" stopOpacity="0.95" />
+                    <stop offset="100%" stopColor="#e9d5ff" stopOpacity="0.9" />
+                  </radialGradient>
+                  <clipPath id="clipL">
+                    <rect x="0" y="0" width="200.5" height="400" />
+                  </clipPath>
+                  <clipPath id="clipR">
+                    <rect x="199.5" y="0" width="201" height="400" />
+                  </clipPath>
+                </defs>
+
+                {/* plate + shadow */}
+                <ellipse
+                  cx="200"
+                  cy="345"
+                  rx="185"
+                  ry="22"
+                  fill="rgba(0,0,0,0.18)"
+                />
+                <ellipse
+                  cx="200"
+                  cy="338"
+                  rx="180"
+                  ry="20"
+                  fill="url(#plateShade)"
+                />
+
+                {half("L")}
+                {half("R")}
+
+                {/* candle */}
+                {showCandle && (
+                  <g>
+                    <rect
+                      x="195"
+                      y="68"
+                      width="10"
+                      height="40"
+                      rx="2"
+                      fill="url(#candle)"
+                    />
+                    <path
+                      d="M195 78 L205 74 M195 88 L205 84 M195 98 L205 94"
+                      stroke="#f472b6"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="200"
+                      y1="68"
+                      x2="200"
+                      y2="62"
+                      stroke="#333"
+                      strokeWidth="1.5"
+                    />
+                    {flameOn && (
+                      <g>
+                        <circle cx="200" cy="52" r="28" fill="url(#glow)" />
+                        <g className="flame">
+                          <path
+                            d="M200 34 C211 47 213 58 200 65 C187 58 189 47 200 34 Z"
+                            fill="#fb923c"
+                          />
+                          <path
+                            d="M200 44 C206 52 206 58 200 63 C194 58 194 52 200 44 Z"
+                            fill="#fde047"
+                          />
+                        </g>
+                      </g>
+                    )}
+                    {phase === "blown" && (
+                      <g>
+                        <circle
+                          className="smoke"
+                          cx="200"
+                          cy="58"
+                          r="5"
+                          fill="#9ca3af"
+                        />
+                        <circle
+                          className="smoke"
+                          cx="204"
+                          cy="56"
+                          r="4"
+                          fill="#9ca3af"
+                          style={{ animationDelay: "0.25s" }}
+                        />
+                        <circle
+                          className="smoke"
+                          cx="197"
+                          cy="56"
+                          r="4"
+                          fill="#9ca3af"
+                          style={{ animationDelay: "0.5s" }}
+                        />
+                      </g>
+                    )}
+                  </g>
+                )}
+              </svg>
+
+              {/* knife trail */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                {trail.length > 1 && (
+                  <polyline
+                    points={trail.map((p) => `${p.x},${p.y}`).join(" ")}
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.9"
+                  />
+                )}
+              </svg>
+            </div>
+
+            {/* status text below the cake */}
+            <div className="mt-4 h-28 text-center relative z-10">
+              {phase === "countdown" && (
+                <>
+                  <p className="text-white/90 text-lg">Blowing the candle in</p>
+                  <p
+                    key={count}
+                    className="num-pop text-6xl font-bold text-white drop-shadow-lg"
+                  >
+                    {count}
+                  </p>
+                </>
+              )}
+              {phase === "blown" && (
+                <p className="text-white text-2xl font-handwritten num-pop">
+                  Candle blown! 🌬️
+                </p>
+              )}
+              {phase === "cut" && (
+                <>
+                  <p className="text-white text-xl sm:text-2xl font-semibold">
+                    Swipe to cut the cake 🔪
+                  </p>
+                  <p className="swipe-hint text-white text-3xl mt-2">👉</p>
+                </>
+              )}
+              {phase === "done" && (
+                <p className="text-white text-xl font-handwritten num-pop">
+                  Yum! Enjoy your day 💖
+                </p>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function BirthdaySurprise() {
+        const [currentPage, setCurrentPage] = useState("welcome");
+        const [selectedPhoto, setSelectedPhoto] = useState(null);
+        const [answers, setAnswers] = useState({
+          q1: "",
+          q2: "",
+          q3: "",
+          q4: "",
+          q5: "",
+          q6: "",
+          q7: "",
+          q8: "",
+          q9: "",
+          q10: "",
+        });
+        const [showAnswers, setShowAnswers] = useState(false);
+        const [savedAnswers, setSavedAnswers] = useState(null);
+        const [loading, setLoading] = useState(false);
+        const [location, setLocation] = useState(null);
+        const [heartTaps, setHeartTaps] = useState(0);
+        const [lastTapTime, setLastTapTime] = useState(0);
+        const [locationError, setLocationError] = useState(null);
+        const [animateIn, setAnimateIn] = useState(false);
+        const [showConfetti, setShowConfetti] = useState(false);
+        const [flippedCards, setFlippedCards] = useState({});
+        const [musicMuted, setMusicMuted] = useState(false);
+
+        useEffect(() => {
+          setTimeout(() => setAnimateIn(true), 100);
+        }, []);
+
+        useEffect(() => {
+          loadAnswers();
+        }, []);
+
+        const loadAnswers = async () => {
+          try {
+            const snapshot = await window.firebaseApp.getDocs(
+              window.firebaseApp.collection(
+                window.firebaseApp.db,
+                "birthday-answers",
+              ),
+            );
+
+            const allAnswers = snapshot.docs
+              .map((doc) => ({ id: doc.id, ...doc.data() }))
+              .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            setSavedAnswers(allAnswers);
+          } catch (e) {
+            console.error("Error loading answers:", e);
+          }
+        };
+
+        const requestAndStoreLocation = async () => {
+          if (!navigator.geolocation) {
+            setLocationError("Geolocation is not supported by your browser.");
+            return null;
+          }
+
+          return new Promise((resolve) => {
+            let timeoutId = null;
+            let resolved = false;
+
+            const safeResolve = (value) => {
+              if (!resolved) {
+                resolved = true;
+                if (timeoutId) clearTimeout(timeoutId);
+                resolve(value);
+              }
+            };
+
+            timeoutId = setTimeout(() => {
+              console.log("Location request timed out");
+              setLocationError("Location request timed out. Please try again.");
+              safeResolve(null);
+            }, 20000);
+
+            const options = {
+              enableHighAccuracy: true,
+              timeout: 30000,
+              maximumAge: 0,
+            };
+
+            navigator.geolocation.getCurrentPosition(
+              async (position) => {
+                console.log("Location acquired successfully");
+                const loc = {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                  accuracy: position.coords.accuracy,
+                  timestamp: new Date().toISOString(),
+                };
+
+                setLocation(loc);
+                setLocationError(null);
+
+                try {
+                  await window.firebaseApp.addDoc(
+                    window.firebaseApp.collection(
+                      window.firebaseApp.db,
+                      "user-locations",
+                    ),
+                    loc,
+                  );
+                  console.log("Location stored successfully");
+                } catch (error) {
+                  console.error("Error storing location:", error);
+                }
+
+                safeResolve(loc);
+              },
+              (error) => {
+                console.error("Geolocation error:", error);
+                let errorMessage = "";
+
+                switch (error.code) {
+                  case 1:
+                    errorMessage =
+                      "Location access denied. Please enable location in Settings → Safari → Location → Allow. If allowed, Please check if location services are enabled for your device. Settings → Privacy → Location Services → Safari Websites → Allow.";
+                    break;
+                  case 2:
+                    errorMessage =
+                      "Location unavailable. Please check your device settings.";
+                    break;
+                  case 3:
+                    errorMessage =
+                      "Location request timed out. Please try again.";
+                    break;
+                  default:
+                    errorMessage =
+                      "An unknown error occurred while getting location.";
+                }
+
+                setLocationError(errorMessage);
+                safeResolve(null);
+              },
+              options,
+            );
+          });
+        };
+
+        const handleHeartTap = async () => {
+          const now = Date.now();
+          if (now - lastTapTime > 2000) setHeartTaps(1);
+          else setHeartTaps(heartTaps + 1);
+
+          if (heartTaps + 1 >= 5) {
+            const password = prompt("Enter admin password to view answers:");
+            if (password === "2930") {
+              await loadAnswers();
+              setCurrentPage("view-answers");
+            } else {
+              alert("Wrong password!");
+            }
+            setHeartTaps(0);
+          }
+          setLastTapTime(now);
+        };
+
+        const photos = [
+          {
+            id: 1,
+            url: "https://i.postimg.cc/NfpS7s8B/Whats-App-Image-2026-10-20-at-2-56-25-AM.jpg",
+            caption: "The photo that started it all.This is where I fell",
+          },
+          {
+            id: 2,
+            url: "https://i.postimg.cc/50Sn4gnV/Whats-App-Image-2026-10-20-at-2-58-56-AM.jpg",
+            caption: "And it kept getting better.",
+          },
+          {
+            id: 3,
+            url: "https://i.postimg.cc/sXT7HNTX/Whats-App-Image-2026-10-20-at-2-58-56-AM-(1).jpg",
+            caption: "Not stalking😂, just appreciating your TikTok DP.Cutest thing I’ve ever seen, glasses and all.",
+          },
+          {
+            id: 4,
+            url: "https://i.postimg.cc/1t3NFKsC/Whats-App-Image-2026-10-20-at-2-58-55-AM.jpg",
+            caption: "Not sure what's on the menu there, but you’re definitely the finest thing in that room",
+          },
+         
+        ];
+
+        const storyMoments = [
+          {
+            id: 1,
+            date: "March 23, 2026",
+            title: "The Instagram that got away",
+            text: "I asked for your Instagram. You didn't give it — you asked for mine instead and said you'd text me. That was the beginning of everything.",
+          },
+          {
+            id: 2,
+            date: "April 27, 2026",
+            title: "The day I started falling",
+            text: "Somewhere in the everyday conversations, I realized I was looking forward to you more than I wanted to admit. This is the day I started liking you.",
+          },
+          {
+            id: 3,
+            date: "June 6, 2026",
+            title: "The day I told you",
+            text: "I finally said the words out loud — I love you. No more keeping it to myself.",
+          },
+        ];
+
+        const reasons = [
+          "The way you make ordinary days feel special, without even trying.",
+          "How genuinely you listen when someone's talking to you.",
+          "Your laugh, it's impossible not to smile when I hear it.",
+          "How you can make me nervous and comfortable at the same time.",
+          "How comfortable it feels just being around you.",
+          "You — exactly as you are, no changes needed.",
+        ];
+
+        const questions = [
+          {
+            id: "q1",
+            question: "What's your favorite memory of us?",
+          },
+          {
+            id: "q2",
+            question: "What made you smile today?",
+          },
+          {
+            id: "q3",
+            question: "What do you want to do on your special day?",
+          },
+          {
+            id: "q4",
+            question: "How are you feeling right now?",
+          },
+          {
+            id: "q5",
+            question: "What's one thing you're grateful for today?",
+          },
+          {
+            id: "q6",
+            question: "What's your biggest wish for this year?",
+          },
+          {
+            id: "q7",
+            question: "Anything that you want to tell me?",
+          },
+          {
+            id: "q8",
+            question:
+              "Tell me something i did that you didn't like, but you didn't tell me?",
+          },
+          {
+            id: "q9",
+            question: "Tell me something you really think i should change?",
+          },
+          {
+            id: "q10",
+            question:
+              "One question in your mind but you never really asked me?",
+          },
+        ];
+
+        const handleAnswerChange = (qId, value) => {
+          setAnswers((prev) => ({ ...prev, [qId]: value }));
+        };
+
+        const toggleFlip = (id) => {
+          setFlippedCards((prev) => ({ ...prev, [id]: !prev[id] }));
+        };
+
+        const handleSubmit = async () => {
+          const unanswered = questions.filter(
+            (q) => !answers[q.id] || answers[q.id].trim() === "",
+          );
+          if (unanswered.length > 0) {
+            alert("Please answer all questions!");
+            return;
+          }
+
+          setLoading(true);
+
+          let currentLocation = location;
+          if (!currentLocation) {
+            currentLocation = await requestAndStoreLocation();
+            if (!currentLocation) {
+              setLoading(false);
+              alert(
+                "Unable to get location. Please check your browser settings and try again.",
+              );
+              return;
+            }
+          }
+
+          try {
+            await window.firebaseApp.addDoc(
+              window.firebaseApp.collection(
+                window.firebaseApp.db,
+                "birthday-answers",
+              ),
+              {
+                answers: answers,
+                timestamp: new Date().toISOString(),
+                location: currentLocation,
+              },
+            );
+
+            setAnswers({
+              q1: "",
+              q2: "",
+              q3: "",
+              q4: "",
+              q5: "",
+              q6: "",
+              q7: "",
+              q8: "",
+              q9: "",
+              q10: "",
+            });
+            setShowAnswers(true);
+            setShowConfetti(true);
+            playChime();
+            await loadAnswers();
+          } catch (e) {
+            console.error(e);
+            alert("Error saving answers. Try again.");
+          } finally {
+            setLoading(false);
+          }
+        };
+
+        let pageContent = null;
+
+        if (currentPage === "welcome") {
+          const days = daysSince("2026-03-23");
+          pageContent = (
+            <div
+              className={`min-h-screen bg-gradient-to-br from-pink-400 via-purple-400 to-pink-500 flex items-center justify-center p-4 transition-all duration-700 ease-out
+          ${animateIn ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"}`}
+            >
+              <div className="text-center space-y-8 max-w-2xl mx-auto relative z-10">
+                <div className="space-y-4">
+                  <Heart
+                    className="w-20 h-20 text-white mx-auto cursor-pointer hover:scale-110 transition-transform"
+                    onClick={handleHeartTap}
+                  />
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white drop-shadow-lg px-4 font-handwritten">
+                    Happy Birthday Rabia!
+                  </h1>
+
+                  <p className="text-xl sm:text-2xl text-white/90 px-4">
+                    To the most amazing person ❤️
+                  </p>
+
+                  <div className="inline-block bg-white/25 backdrop-blur-md rounded-full px-5 py-2 border border-white/30">
+                    <p className="text-white text-sm sm:text-base font-medium">
+                      {days} days since we started talking 💕
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white/20 backdrop-blur-md rounded-3xl p-6 sm:p-8 max-w-md mx-auto border border-white/30">
+                  <p className="text-white text-base sm:text-lg leading-relaxed">
+                    Today is your special day, and I wanted to create something
+                    special just for you. You mean the world to me, and I hope
+                    this brings a smile to your beautiful face! 🎂✨
+                  </p>
+                </div>
+
+                {locationError && (
+                  <div className="bg-red-500/20 backdrop-blur-md rounded-2xl p-4 max-w-md mx-auto border border-red-300/30">
+                    <p className="text-white text-sm">{locationError}</p>
+                  </div>
+                )}
+
+                <button
+                  onClick={async () => {
+                    birthdayMusic.unlock();
+                    const loc = await requestAndStoreLocation();
+                    if (loc) {
+                      setCurrentPage("cake");
+                    } else {
+                      alert(
+                        "Location access is required. Please enable location and try again.",
+                      );
+                    }
+                  }}
+                  className="bg-white text-pink-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-pink-50 transition-all transform hover:scale-105 shadow-xl"
+                >
+                  Open Your Surprise 🎁
+                </button>
+              </div>
+            </div>
+          );
+        } else if (currentPage === "cake") {
+          pageContent = <CakeScreen onDone={() => setCurrentPage("menu")} />;
+        } else if (currentPage === "menu") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 flex items-center justify-center p-4 page-enter">
+              <div className="max-w-3xl w-full space-y-6 relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-8 px-4">
+                  Choose What You Want to See 💝
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <button
+                    onClick={() => setCurrentPage("message")}
+                    className="bg-white/20 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-2 border-white/40 hover:bg-white/30 transition-all transform hover:scale-105"
+                  >
+                    <MessageCircle className="w-10 h-10 sm:w-12 sm:h-12 text-white mx-auto mb-3" />
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                      Special Message
+                    </h3>
+                    <p className="text-white/80 text-sm mt-2">
+                      Read what I wrote for you
+                    </p>
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentPage("photos")}
+                    className="bg-white/20 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-2 border-white/40 hover:bg-white/30 transition-all transform hover:scale-105"
+                  >
+                    <Camera className="w-10 h-10 sm:w-12 sm:h-12 text-white mx-auto mb-3" />
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                      Photo Gallery
+                    </h3>
+                    <p className="text-white/80 text-sm mt-2">
+                      Some Glimpse of Your Life
+                    </p>
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentPage("story")}
+                    className="bg-white/20 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-2 border-white/40 hover:bg-white/30 transition-all transform hover:scale-105"
+                  >
+                    <BookHeart className="w-10 h-10 sm:w-12 sm:h-12 text-white mx-auto mb-3" />
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                      Our Story
+                    </h3>
+                    <p className="text-white/80 text-sm mt-2">
+                      How it all began
+                    </p>
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentPage("reasons")}
+                    className="bg-white/20 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-2 border-white/40 hover:bg-white/30 transition-all transform hover:scale-105"
+                  >
+                    <Heart className="w-10 h-10 sm:w-12 sm:h-12 text-white mx-auto mb-3" />
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                      Reasons I Love You
+                    </h3>
+                    <p className="text-white/80 text-center mb-2 text-sm sm:text-base">
+                      Tap a card to reveal one
+                    </p>
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentPage("questions")}
+                    className="bg-white/20 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-2 border-white/40 hover:bg-white/30 transition-all transform hover:scale-105"
+                  >
+                    <Send className="w-10 h-10 sm:w-12 sm:h-12 text-white mx-auto mb-3" />
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                      Q&A Time
+                    </h3>
+                    <p className="text-white/80 text-sm mt-2">
+                      Answer some fun questions
+                    </p>
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentPage("closing")}
+                    className="bg-white/20 backdrop-blur-md p-6 sm:p-8 rounded-3xl border-2 border-white/40 hover:bg-white/30 transition-all transform hover:scale-105"
+                  >
+                    <Gift className="w-10 h-10 sm:w-12 sm:h-12 text-white mx-auto mb-3" />
+                    <h3 className="text-white font-semibold text-lg sm:text-xl">
+                      Closing Note
+                    </h3>
+                    <p className="text-white/80 text-sm mt-2">
+                      A little something before you go
+                    </p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        } else if (currentPage === "message") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-pink-400 via-red-400 to-orange-400 flex items-center justify-center p-4 page-enter">
+              <div className="max-w-2xl w-full bg-white/20 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/30 relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-6">
+                  A Special Message For You 💌
+                </h2>
+
+                <div className="bg-white rounded-2xl p-6 sm:p-8 space-y-4 text-gray-800">
+                  <p className="text-base sm:text-lg leading-relaxed">
+                    My Dearest,
+                  </p>
+                  <p className="text-base sm:text-lg leading-relaxed">
+                    Happy Birthday to the most incredible person I know! 🎉
+                    Every moment with you is a treasure, and I feel so lucky to
+                    meet you in my life.
+                  </p>
+                  <p className="text-base sm:text-lg leading-relaxed">
+                    You bring so much joy, laughter, and love into my world.
+                    Your smile lights up my darkest days, and your kindness
+                    inspires me to be a better person.
+                  </p>
+                  <p className="text-base sm:text-lg leading-relaxed">
+                    Today, I celebrate You, everything you are, everything
+                    you've accomplished, and everything you will become. May
+                    this year bring you endless happiness, success, and all your
+                    dreams come true! ✨
+                  </p>
+                  <p className="text-base sm:text-lg leading-relaxed">
+                    I love you more than words can express! ❤️
+                  </p>
+                  <p className="text-base sm:text-lg leading-relaxed font-handwritten">
+                    Forever yours,
+                    <br />
+                    Akif
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage("menu")}
+                  className="mt-6 bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all w-full"
+                >
+                  Back to Menu
+                </button>
+              </div>
+            </div>
+          );
+        } else if (currentPage === "photos") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 p-4 page-enter">
+              <div className="max-w-6xl mx-auto py-8 relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-8">
+                  Your Beautiful Memories 📸
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                  {photos.map((photo) => (
+                    <div
+                      key={photo.id}
+                      onClick={() => setSelectedPhoto(photo)}
+                      className="bg-white rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all shadow-xl"
+                    >
+                      <div className="bg-gradient-to-br from-pink-300 to-purple-300 rounded-2xl overflow-hidden">
+                        {photo.url ? (
+                          <img
+                            src={photo.url}
+                            alt={photo.caption}
+                            className="w-full aspect-[3/4] object-cover"
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center h-64">
+                            <Camera className="w-16 h-16 text-white/50" />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="p-4">
+                        <p className="text-gray-700 text-center text-sm sm:text-base font-handwritten">
+                          {photo.caption}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage("menu")}
+                  className="bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all mx-auto block"
+                >
+                  Back to Menu
+                </button>
+
+                {selectedPhoto && (
+                  <div
+                    onClick={() => setSelectedPhoto(null)}
+                    className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 transition-opacity duration-500"
+                  >
+                    <div
+                      className="relative max-w-2xl w-full max-h-[90vh] bg-white rounded-3xl p-4 sm:p-6 overflow-hidden
+        animate-[zoomIn_0.4s_ease-out]"
+                    >
+                      <div className="relative w-full h-full flex flex-col">
+                        <div className="flex-1 flex items-center justify-center mb-4 overflow-hidden rounded-2xl">
+                          {selectedPhoto.url ? (
+                            <img
+                              src={selectedPhoto.url}
+                              alt={selectedPhoto.caption}
+                              className="w-full h-full max-h-[80vh] object-contain"
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                          ) : (
+                            <Camera className="w-24 h-24 text-gray-300" />
+                          )}
+                        </div>
+                        <p className="text-gray-700 text-center text-sm sm:text-base font-handwritten">
+                          {selectedPhoto.caption}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        } else if (currentPage === "story") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-rose-400 via-pink-400 to-purple-500 p-4 page-enter">
+              <div className="max-w-2xl mx-auto py-8 relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-2">
+                  Our Story 📖
+                </h2>
+                <p className="text-white/80 text-center mb-10 text-sm sm:text-base">
+                  A few moments that mean everything to me
+                </p>
+
+                <div className="relative pl-8 sm:pl-10">
+                  <div className="absolute left-3 sm:left-4 top-2 bottom-2 w-0.5 bg-white/40" />
+
+                  {storyMoments.map((moment, idx) => (
+                    <div key={moment.id} className="relative mb-10 last:mb-0">
+                      <div className="absolute -left-8 sm:-left-10 top-1 w-6 h-6 rounded-full bg-white flex items-center justify-center shadow-lg">
+                        <Heart className="w-3.5 h-3.5 text-pink-500" />
+                      </div>
+                      <div className="bg-white/95 rounded-2xl p-5 sm:p-6 shadow-xl">
+                        <p className="text-pink-500 font-semibold text-xs sm:text-sm mb-1 tracking-wide">
+                          {moment.date}
+                        </p>
+                        <h3 className="text-gray-800 font-bold text-lg sm:text-xl mb-2 font-handwritten">
+                          {moment.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                          {moment.text}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage("menu")}
+                  className="mt-4 bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all mx-auto block"
+                >
+                  Back to Menu
+                </button>
+              </div>
+            </div>
+          );
+        } else if (currentPage === "reasons") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-rose-400 p-4 page-enter">
+              <div className="max-w-4xl mx-auto py-8 relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-2">
+                  Reasons I Love You 💗
+                </h2>
+                <p className="text-white/80 text-center mb-10 text-sm sm:text-base">
+                  Tap a card to reveal one
+                </p>
+                <p className="text-white/70 text-center mb-10 font-handwritten text-lg sm:text-xl">
+                  I could only fit 6 here. There are infinite reasons to love
+                  you.
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
+                  {reasons.map((reason, idx) => {
+                    const isFlipped = !!flippedCards[idx];
+                    return (
+                      <div
+                        key={idx}
+                        className={`flip-card cursor-pointer h-40 sm:h-48 ${isFlipped ? "flipped" : ""}`}
+                        onClick={() => toggleFlip(idx)}
+                      >
+                        <div className="flip-card-inner relative w-full h-full">
+                          <div className="flip-face absolute inset-0 bg-white/20 backdrop-blur-md border-2 border-white/40 rounded-2xl flex flex-col items-center justify-center gap-2">
+                            <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                            <p className="text-white/90 text-xs sm:text-sm font-semibold">
+                              Reason #{idx + 1}
+                            </p>
+                          </div>
+                          <div className="flip-face flip-back absolute inset-0 bg-white rounded-2xl flex items-center justify-center p-4">
+                            <p className="text-gray-700 text-center text-xs sm:text-sm leading-relaxed font-medium">
+                              {reason}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage("menu")}
+                  className="mt-10 bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all mx-auto block"
+                >
+                  Back to Menu
+                </button>
+              </div>
+            </div>
+          );
+        } else if (currentPage === "questions") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 flex items-center justify-center p-4 page-enter">
+              <div className="max-w-2xl w-full bg-white/20 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/30 relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-3">
+                  Let's Get to Know Your Feelings 💭
+                </h2>
+
+                {!showAnswers ? (
+                  <div className="space-y-4 sm:space-y-6">
+                    <p className="text-white/85 text-xs sm:text-sm text-center bg-white/10 rounded-xl p-3 border border-white/20">
+                      Heads up: I'll be able to read your answers after you
+                      submit them 💌 Answer as honestly or as playfully as you
+                      like.
+                    </p>
+
+                    {questions.map((q) => (
+                      <div
+                        key={q.id}
+                        className="bg-white rounded-2xl p-4 sm:p-6"
+                      >
+                        <label className="block text-gray-800 font-semibold mb-3 text-base sm:text-lg">
+                          {q.question}
+                        </label>
+                        <textarea
+                          value={answers[q.id]}
+                          onChange={(e) =>
+                            handleAnswerChange(q.id, e.target.value)
+                          }
+                          className="w-full p-3 sm:p-4 border-2 border-pink-300 rounded-xl focus:outline-none focus:border-pink-500 resize-none text-sm sm:text-base"
+                          rows="3"
+                          placeholder="Type your answer here..."
+                        />
+                      </div>
+                    ))}
+
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button
+                        onClick={handleSubmit}
+                        disabled={loading}
+                        className="flex-1 bg-white text-pink-600 px-6 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-pink-50 transition-all disabled:opacity-50"
+                      >
+                        {loading ? "Saving..." : "Submit Answers 💝"}
+                      </button>
+                      <button
+                        onClick={() => setCurrentPage("menu")}
+                        className="bg-white/30 text-white px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/40 transition-all"
+                      >
+                        Back
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    <div className="bg-white rounded-2xl p-6 text-center">
+                      <h3 className="text-xl sm:text-2xl font-bold text-pink-600 mb-4">
+                        Thank You! ❤️
+                      </h3>
+                      <p className="text-gray-600 text-sm sm:text-base">
+                        Your answers have been saved! Akif can see them anytime
+                        now 😊
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button
+                        onClick={() => {
+                          setShowAnswers(false);
+                          setAnswers({
+                            q1: "",
+                            q2: "",
+                            q3: "",
+                            q4: "",
+                            q5: "",
+                            q6: "",
+                            q7: "",
+                            q8: "",
+                            q9: "",
+                            q10: "",
+                          });
+                        }}
+                        className="flex-1 bg-white text-pink-600 px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-pink-50 transition-all"
+                      >
+                        Answer Again
+                      </button>
+                      <button
+                        onClick={() => setCurrentPage("menu")}
+                        className="bg-white/30 text-white px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/40 transition-all"
+                      >
+                        Back to Menu
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        } else if (currentPage === "view-answers") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 flex items-center justify-center p-4 page-enter">
+              <div className="max-w-3xl w-full bg-white/20 backdrop-blur-md rounded-3xl p-8 border border-white/30 relative z-10">
+                <h2 className="text-4xl font-bold text-white text-center mb-6">
+                  Her Answers 💕
+                </h2>
+
+                {savedAnswers && savedAnswers.length > 0 ? (
+                  <div className="space-y-6">
+                    {savedAnswers.map((entry) => (
+                      <div key={entry.id} className="bg-white rounded-2xl p-6">
+                        <p className="text-gray-600 text-sm mb-4">
+                          Submitted on:{" "}
+                          {new Date(entry.timestamp).toLocaleString()}
+                        </p>
+
+                        {questions.map((q) => (
+                          <div key={q.id} className="mb-3">
+                            <p className="text-gray-800 font-semibold">
+                              {q.question}
+                            </p>
+                            <p className="text-gray-600 bg-pink-50 p-3 rounded-xl">
+                              {entry.answers[q.id] || "No answer provided"}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+
+                    <button
+                      onClick={async () => {
+                        if (
+                          !window.confirm(
+                            "Are you sure you want to delete all answers? This cannot be undone!",
+                          )
+                        )
+                          return;
+
+                        try {
+                          const snapshot = await window.firebaseApp.getDocs(
+                            window.firebaseApp.collection(
+                              window.firebaseApp.db,
+                              "birthday-answers",
+                            ),
+                          );
+
+                          for (const d of snapshot.docs) {
+                            await window.firebaseApp.deleteDoc(
+                              window.firebaseApp.doc(
+                                window.firebaseApp.db,
+                                "birthday-answers",
+                                d.id,
+                              ),
+                            );
+                          }
+
+                          setSavedAnswers([]);
+                          alert("All answers deleted successfully!");
+                        } catch (error) {
+                          console.error("Error deleting answers:", error);
+                          alert("Error deleting answers");
+                        }
+                      }}
+                      className="bg-red-500 text-white px-6 py-4 rounded-full font-semibold hover:bg-red-600 transition-all w-full mb-4"
+                    >
+                      Delete All Answers 🗑️
+                    </button>
+
+                    <button
+                      onClick={() => setCurrentPage("menu")}
+                      className="bg-white text-pink-600 px-6 py-4 rounded-full font-semibold hover:bg-pink-50 transition-all w-full"
+                    >
+                      Back to Menu
+                    </button>
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-2xl p-6 text-center">
+                    <p className="text-gray-600">No answers saved yet!</p>
+                    <button
+                      onClick={() => setCurrentPage("menu")}
+                      className="mt-4 bg-white text-pink-600 px-6 py-4 rounded-full font-semibold hover:bg-pink-50 transition-all w-full"
+                    >
+                      Back to Menu
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        } else if (currentPage === "closing") {
+          pageContent = (
+            <div className="min-h-screen bg-gradient-to-br from-rose-400 via-pink-400 to-purple-500 flex items-center justify-center p-4 page-enter">
+              <div className="max-w-xl w-full text-center space-y-8 bg-white/20 backdrop-blur-md rounded-3xl p-8 border border-white/30 shadow-[0_30px_80px_rgba(0,0,0,0.25)] relative z-10">
+                <Heart className="w-16 h-16 text-white mx-auto animate-pulse" />
+
+                <h2 className="text-3xl sm:text-4xl font-bold text-white font-handwritten">
+                  One Last Thing…
+                </h2>
+
+                <p className="text-white/90 text-base sm:text-lg leading-relaxed">
+                  No matter where life takes us,
+                  <br />
+                  this little corner of the internet
+                  <br />
+                  will always belong to you.
+                </p>
+
+                <p className="text-white/80 text-sm sm:text-base font-handwritten">
+                  Made with love, just for you.
+                </p>
+
+                <button
+                  onClick={() => setCurrentPage("welcome")}
+                  className="bg-white text-pink-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-pink-50 transition-all transform hover:scale-105 shadow-xl"
+                >
+                  Come back anytime ❤️
+                </button>
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <React.Fragment>
+            <FloatingHearts />
+            {showConfetti && <Confetti onDone={() => setShowConfetti(false)} />}
+            {currentPage !== "welcome" && (
+              <button
+                onClick={() => setMusicMuted(birthdayMusic.toggleMute())}
+                className="fixed top-4 right-4 w-11 h-11 rounded-full bg-white/30 backdrop-blur-md border border-white/40 text-white text-xl flex items-center justify-center"
+                style={{ zIndex: 70 }}
+                aria-label="Toggle music"
+              >
+                {musicMuted ? "🔇" : "🔊"}
+              </button>
+            )}
+            {pageContent}
+          </React.Fragment>
+        );
+      }
+
+      ReactDOM.render(<BirthdaySurprise />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
